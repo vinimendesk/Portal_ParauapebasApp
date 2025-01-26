@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">Portal Parauapebas App</string>
     <string name="portal_parauapebas_appBarTex">PORTAL PARAUAPEBAS</string>
+    <string name="news_NavigationItem">News</string>
+    <string name="my_profile_NavigationItem">My Profile</string>
 </resources>
