@@ -1,8 +1,8 @@
 package com.example.portalparauapebasapp.data
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.Send
 import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.Send
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
 import com.example.portalparauapebasapp.R
@@ -16,7 +16,7 @@ object NavigationContentList {
         return listOf(
             NavigationItemContent(
                 screenType = ScreenType.NEWS,
-                icon = Icons.Default.Send,
+                icon = Icons.AutoMirrored.Filled.Send,
                 text = context.getString(R.string.news_NavigationItem)
             ),
             NavigationItemContent(
