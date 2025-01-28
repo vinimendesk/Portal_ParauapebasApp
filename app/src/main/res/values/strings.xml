@@ -3,4 +3,6 @@
     <string name="portal_parauapebas_appBarTex">PORTAL PARAUAPEBAS</string>
     <string name="news_NavigationItem">News</string>
     <string name="my_profile_NavigationItem">My Profile</string>
+    <string name="show_more_contentButtonNews">Show more content</string>
+    <string name="author_pictureDescription">Author Picture</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.portalparauapebasapp.ui
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -21,11 +22,13 @@ import com.example.portalparauapebasapp.text.fontAppBar
 import com.example.portalparauapebasapp.ui.theme.Pink
 import com.example.portalparauapebasapp.ui.theme.PortalParauapebasAppTheme
 
+// Função de inicialização do aplicativo que será chamada no MainActivity.
 @Composable
 fun PortalPebaApp (modifier: Modifier = Modifier) {
     Scaffold(
         // Define a função da barra superior.
         topBar = { PortalPebaAppBar() },
+        // Define a função da barra de navegaçãi inferior.
         bottomBar = { PortalPebaBottomNavigation(
             currentTab = ScreenType.NEWS,
             navigationItemContentList = NavigationContentList.getNavigationContentList(),
@@ -33,7 +36,11 @@ fun PortalPebaApp (modifier: Modifier = Modifier) {
         ) }
     ) {paddingValues ->
         // Função da tela de notícias.
-        NewsScreen(Modifier.padding(paddingValues))
+        Column() {
+            NewsScreen(modifier = Modifier.padding(paddingValues))
+            // Problema de exibição com o card de descrição da noticia.
+            //NewsContentDescription()
+        }
     }
 }
 
