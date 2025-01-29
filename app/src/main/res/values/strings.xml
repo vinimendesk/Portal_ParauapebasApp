@@ -5,4 +5,28 @@
     <string name="my_profile_NavigationItem">My Profile</string>
     <string name="show_more_contentButtonNews">Show more content</string>
     <string name="author_pictureDescription">Author Picture</string>
+    <string name="news_description_vini">
+        Tá ligado né, bagulho é e ser ninja, fazer tudo nas sombras, escondidinho, não é segredo.\n
+        Depois é só fazer carreata e prometer butijão de gás para todo mundo. Amanhã eu viajo para \n
+        Paris e o povo ainda me adora.\n
+        O protótipo não deveria conter tantas palavras. My name’s JOHN CENNA!!!! PANPANRANPAM
+    </string>
+    <string name="news_description_jainer">
+        Jainer por ter seu sobrenome Leite, ele é completamente tolerante a substãncia. Ele gosta.\n
+        do leite em todas as suas formas, no queijo, no requeijão, mingual. Um verdadeiro amante. \n
+        Continu0 tentando improvisar noticías.\n
+        O protótipo não deveria conter tantas palavras. It's been a long time baby.
+    </string>
+    <string name="news_description_mariana">
+        Mesmo sem um dor, mesmo sem talento, eu posso ser bom, com muito treinamento.\n
+        Para provar minha teoria, eu vou até o final, porque o trabalho duro vence. \n
+        o dom natural.\n
+        Melhor rap do Tauz, tá maluco.
+    </string>
+    <string name="vinicius_mendes_author">Vinicius Mendes</string>
+    <string name="title_vini_post">TUTORIAL DE COMO ROUBAR UMA CIDADE E NÃO SER PRESO</string>
+    <string name="jainer_silva_author">Jainer Silva</string>
+    <string name="jainer_description_post">MOTIVOS PARA O LEITE SER O MELHOR ALIMENTO</string>
+    <string name="mariana_cardoso_author">Mariana Cardoso</string>
+    <string name="mariana_title_post">MENSAGEM MOTIVACIONAL</string>
 </resources>

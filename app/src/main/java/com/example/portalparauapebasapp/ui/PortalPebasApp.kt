@@ -36,10 +36,8 @@ fun PortalPebaApp (modifier: Modifier = Modifier) {
         ) }
     ) {paddingValues ->
         // Função da tela de notícias.
-        Column() {
-            NewsScreen(modifier = Modifier.padding(paddingValues))
-            // Problema de exibição com o card de descrição da noticia.
-            //NewsContentDescription()
+        Column(modifier = Modifier.padding(paddingValues)) {
+            NewsScreen()
         }
     }
 }
