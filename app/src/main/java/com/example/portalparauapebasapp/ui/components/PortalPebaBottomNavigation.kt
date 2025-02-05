@@ -15,11 +15,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.portalparauapebasapp.model.NavigationItemContent
 import com.example.portalparauapebasapp.model.ScreenType
-import com.example.portalparauapebasapp.ui.theme.SelectedNavigationBarItemIconColor
-import com.example.portalparauapebasapp.ui.theme.SelectedNavigationBarItemIndicatorColor
-import com.example.portalparauapebasapp.ui.theme.TopBottomAppBarColor
-import com.example.portalparauapebasapp.ui.theme.UnselectedNavigationBarItemIconColor
-import com.example.portalparauapebasapp.ui.theme.UnselectedNavigationBarItemIndicatorColor
+import com.example.portalparauapebasapp.ui.theme.DarkGray
+import com.example.portalparauapebasapp.ui.theme.DarkPink
+import com.example.portalparauapebasapp.ui.theme.DarkPurple
+import com.example.portalparauapebasapp.ui.theme.Pink
+import com.example.portalparauapebasapp.ui.theme.MinorWhite
 
 // Função da barra de navegação inferior.
 @Composable
@@ -31,7 +31,7 @@ fun PortalPebaBottomNavigation(
 ) {
     NavigationBar(
         modifier = modifier,
-        containerColor = TopBottomAppBarColor
+        containerColor = Pink
     ) {
         for (navItem in navigationItemContentList) {
             NavigationBarItem(
@@ -42,8 +42,8 @@ fun PortalPebaBottomNavigation(
                         modifier = Modifier
                             .background(
                                 color = when (currentTab == navItem.screenType) {
-                                    true -> SelectedNavigationBarItemIndicatorColor
-                                    false -> UnselectedNavigationBarItemIndicatorColor
+                                    true -> DarkPurple
+                                    false -> DarkPink
                                 },
                                 shape = CircleShape
                             )
@@ -58,8 +58,8 @@ fun PortalPebaBottomNavigation(
                 },
                 colors = NavigationBarItemDefaults.colors(
                     indicatorColor = Color.Transparent,
-                    selectedIconColor = SelectedNavigationBarItemIconColor,
-                    unselectedIconColor = UnselectedNavigationBarItemIconColor
+                    selectedIconColor = MinorWhite,
+                    unselectedIconColor = DarkGray
                 )
             )
         }

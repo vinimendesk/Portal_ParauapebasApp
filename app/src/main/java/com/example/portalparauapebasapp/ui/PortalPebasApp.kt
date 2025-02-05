@@ -10,13 +10,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.portalparauapebasapp.data.NavigationContentList
+import com.example.portalparauapebasapp.data.ProfilesList
 import com.example.portalparauapebasapp.model.ScreenType
 import com.example.portalparauapebasapp.ui.components.PortalPebaAppBar
 import com.example.portalparauapebasapp.ui.components.PortalPebaBottomNavigation
 import com.example.portalparauapebasapp.ui.theme.PortalParauapebasAppTheme
 
 @Composable
-fun PortalPebaApp () {
+fun PortalPebaApp() {
     var currentTab by remember { mutableStateOf(ScreenType.NEWS) }
 
     Scaffold(
@@ -37,8 +38,16 @@ fun PortalPebaApp () {
 // função para exibir a tela respectiva ao botão de navegação pressionado
 @Composable
 fun ShowTab(targetTab: ScreenType, modifier: Modifier = Modifier) {
+    val profilesList = ProfilesList.getProfilesList()
+    var currentProfile by remember { mutableStateOf(profilesList[0]) }
+
     if (targetTab == ScreenType.PROFILE) {
-        ProfileScreen(modifier)
+        ProfileScreen(
+            currentProfile = currentProfile,
+            profilesList = profilesList,
+            onChangeCurrentProfile = { profile -> currentProfile = profile },
+            modifier = modifier
+        )
     } else {
         NewsScreen(modifier)
     }
