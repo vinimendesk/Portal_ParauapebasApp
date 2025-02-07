@@ -1,67 +1,142 @@
 package com.example.portalparauapebasapp.ui
 
+import android.annotation.SuppressLint
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CardElevation
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.portalparauapebasapp.R
+import com.example.portalparauapebasapp.data.NewsList
 import com.example.portalparauapebasapp.text.fontAppBar
 import com.example.portalparauapebasapp.ui.theme.Gray
 import com.example.portalparauapebasapp.ui.theme.Pink
+import com.example.portalparauapebasapp.ui.theme.PinkStrong
 import com.example.portalparauapebasapp.ui.theme.PortalParauapebasAppTheme
-import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
-
 
 @Composable
+@SuppressLint("MutableCollectionMutableState")
 fun NewsScreen(modifier: Modifier = Modifier) {
-    NewsContent(
-        onClickButtonShowMore = {  },
+    val newsList = NewsList.getNewsList()
+    var moreInformation by remember {
+        mutableStateOf(
+            mutableMapOf<Int, Boolean>().apply {
+                newsList.forEachIndexed { index, _ ->
+                    this[index] = false
+                }
+            }
+        )
+    }
+
+    LazyColumn(
         modifier = modifier
-    )
+            .animateContentSize(
+                animationSpec = spring(
+                    dampingRatio = Spring.DampingRatioNoBouncy,
+                    stiffness = Spring.StiffnessMedium
+                )
+            )
+            .padding(bottom = 10.dp)
+    ) {
+        newsList.forEachIndexed { index, _ ->
+            val news = newsList[index]
+            item {
+                NewsContent(
+                    newsTitle = news.title,
+                    newsAuthor = news.author,
+                    newsAuthorIcon = news.authorAvatar,
+                    newsPostTime = news.postTime,
+                    moreInformation = moreInformation[index] ?: false,
+                    onClickButtonShowMore = {
+                        moreInformation = moreInformation.toMutableMap().apply {
+                            this[index] = !(this[index] ?: false)
+                        }
+                    }
+                )
+                if (moreInformation[index] == true) {
+                    NewsContentDescription(newsDescription = news.description)
+                }
+            }
+        }
+    }
 }
 
 @Composable
 fun NewsContent(
+    newsTitle: String,
+    newsAuthor: String,
+    newsAuthorIcon: Painter,
+    newsPostTime: String,
+    moreInformation: Boolean,
     onClickButtonShowMore: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val colorCompose by animateColorAsState(
+        targetValue = if (moreInformation) PinkStrong else Pink
+    )
+    val colorText by animateColorAsState(
+        targetValue = if (moreInformation) Color.White else Color.Black
+    )
     Card(
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-        colors = CardDefaults.cardColors(containerColor = Pink),
+        colors = CardDefaults.cardColors(containerColor = colorCompose),
         modifier = modifier
             .fillMaxWidth()
             .padding(start = 16.dp, end = 16.dp, top = 16.dp)
+            .drawBehind {
+                if (!moreInformation) return@drawBehind
+                val shadowColor = Color.Black
+                val shadowSize = 60f
+
+                drawRect(
+                    color = Gray,
+                    topLeft = Offset(0f, size.height - shadowSize / 2),
+                    size = Size(size.width, shadowSize),
+                )
+                drawRect(
+                    color = shadowColor,
+                    topLeft = Offset(0f, size.height - shadowSize / 2),
+                    size = Size(size.width, shadowSize),
+                    alpha = 0.5f
+                )
+            }
     ) {
         Column {
             // Faixa Título e IconButton.
@@ -70,14 +145,15 @@ fun NewsContent(
                     .fillMaxWidth()
             ) {
                 Row(
-                    horizontalArrangement = Arrangement.Center,
                     modifier = Modifier
                         .fillMaxWidth()
                 ) {
                     Text(
-                        text = "TUTORIAL DE COMO ROUBAR UMA CIDADE E NÃO SER PRESO",
+                        text = newsTitle,
+                        color = colorText,
                         fontSize = 10.5.sp,
                         fontFamily = fontAppBar,
+                        textAlign = TextAlign.Justify,
                         modifier = Modifier.padding(
                             start = 8.dp,
                             top = 8.dp,
@@ -90,8 +166,9 @@ fun NewsContent(
                     onClick = onClickButtonShowMore,
                     content = {
                         Icon(
-                            imageVector = Icons.Default.KeyboardArrowDown,
-                            contentDescription = stringResource(R.string.show_more_contentButtonNews)
+                            imageVector = if (moreInformation) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
+                            contentDescription = stringResource(R.string.show_more_contentButtonNews),
+                            tint = Color.Black
                         )
                     },
                     modifier = Modifier
@@ -111,16 +188,17 @@ fun NewsContent(
                         .align(Alignment.CenterStart)
                 ) {
                     Image(
-                        painter = painterResource(R.drawable.eu),
+                        painter = newsAuthorIcon,
                         contentDescription = stringResource(R.string.author_pictureDescription),
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
-                            .clip(CircleShape)
-                            .size(40.dp)
+                            .size(30.dp)
                             .padding(start = 4.dp, bottom = 4.dp)
+                            .clip(CircleShape)
                     )
                     Text(
-                        text = "Vinicius Mendes",
+                        text = newsAuthor,
+                        color = colorText,
                         fontSize = 8.sp,
                         fontFamily = fontAppBar,
                         modifier = Modifier
@@ -128,7 +206,8 @@ fun NewsContent(
                     )
                 }
                 Text(
-                    text = "Postado há 5 minutos",
+                    text = newsPostTime,
+                    color = colorText,
                     fontSize = 8.sp,
                     fontFamily = fontAppBar,
                     modifier = Modifier
@@ -141,28 +220,42 @@ fun NewsContent(
 }
 
 @Composable
-fun NewsContentDescription(modifier: Modifier = Modifier) {
-        Card(
-            colors = CardDefaults.cardColors(containerColor = Gray),
-            modifier = modifier
-                .fillMaxWidth()
-        ) {
-            Text(
-                text = "     Tá ligado né, bagulho é e ser ninja, fazer tudo nas sombras, escondidinho, não é segredo.\n" +
-                        "Depois é só fazer carreata e prometer butijão de gás para todo mundo. Amanhã eu viajo para \n" +
-                        "Paris e o povo ainda me adora.\n" +
-                        "     O protótipo não deveria conter tantas palavras. My name’s JOHN CENNA!!!! PANPANRANPAM",
-                fontFamily = fontAppBar,
-                textAlign = TextAlign.Justify,
-                fontSize = 14.sp,
-                color = Color.White,
-                modifier = Modifier
-                    .padding(8.dp)
-            )
-        }
+fun NewsContentDescription(
+    newsDescription: String,
+    modifier: Modifier = Modifier
+) {
+    Card(
+        shape = RoundedCornerShape(bottomStart = 16.dp, bottomEnd = 16.dp),
+        colors = CardDefaults.cardColors(containerColor = Gray),
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(start = 16.dp, end = 16.dp)
+            .drawWithContent {
+                drawContent()
+
+                val shadowColor = Color.Black
+                val shadowSize = 8f
+
+                drawRect(
+                    color = shadowColor,
+                    size = Size(size.width, shadowSize),
+                    alpha = 0.5f
+                )
+            }
+    ) {
+        Text(
+            text = newsDescription,
+            fontFamily = fontAppBar,
+            textAlign = TextAlign.Justify,
+            fontSize = 14.sp,
+            color = Color.White,
+            modifier = Modifier
+                .padding(8.dp)
+        )
+    }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun NewsScreenPreview() {
     PortalParauapebasAppTheme {
@@ -174,6 +267,6 @@ fun NewsScreenPreview() {
 @Composable
 fun NewsContentDescriptionPreview() {
     PortalParauapebasAppTheme {
-        NewsContentDescription()
+        NewsContentDescription(stringResource(R.string.news_description_vini))
     }
 }
