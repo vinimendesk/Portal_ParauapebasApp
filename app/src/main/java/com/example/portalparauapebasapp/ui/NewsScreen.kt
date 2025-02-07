@@ -145,7 +145,6 @@ fun NewsContent(
                     .fillMaxWidth()
             ) {
                 Row(
-
                     modifier = Modifier
                         .fillMaxWidth()
                 ) {

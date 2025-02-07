@@ -1,5 +1,6 @@
 package com.example.portalparauapebasapp.ui
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -16,6 +17,7 @@ import com.example.portalparauapebasapp.ui.components.PortalPebaAppBar
 import com.example.portalparauapebasapp.ui.components.PortalPebaBottomNavigation
 import com.example.portalparauapebasapp.ui.theme.PortalParauapebasAppTheme
 
+// Função de inicialização do aplicativo que será chamada no MainActivity.
 @Composable
 fun PortalPebaApp() {
     var currentTab by remember { mutableStateOf(ScreenType.NEWS) }
