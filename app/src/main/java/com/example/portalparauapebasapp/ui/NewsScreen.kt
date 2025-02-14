@@ -51,10 +51,16 @@ import com.example.portalparauapebasapp.ui.theme.Pink
 import com.example.portalparauapebasapp.ui.theme.PinkStrong
 import com.example.portalparauapebasapp.ui.theme.PortalParauapebasAppTheme
 
+// Função responsável por exibir a tela de notícias.
 @Composable
 @SuppressLint("MutableCollectionMutableState")
 fun NewsScreen(modifier: Modifier = Modifier) {
+
+    // Variável que recebe os dados das noticias.
     val newsList = NewsList.getNewsList()
+
+    /* Função que intera sobre pares de índices e valores da lista de notícias. E seta que todos os
+    itens terão moreInformation como False*/
     var moreInformation by remember {
         mutableStateOf(
             mutableMapOf<Int, Boolean>().apply {

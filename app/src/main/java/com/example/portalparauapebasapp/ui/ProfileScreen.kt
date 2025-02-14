@@ -17,63 +17,68 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.portalparauapebasapp.R
-import com.example.portalparauapebasapp.data.ProfilesList
 import com.example.portalparauapebasapp.model.Profile
 import com.example.portalparauapebasapp.text.fontAppBar
 import com.example.portalparauapebasapp.ui.components.SwitchProfileDialog
 import com.example.portalparauapebasapp.ui.theme.BlueStrong
-import com.example.portalparauapebasapp.ui.theme.PortalParauapebasAppTheme
+import com.example.portalparauapebasapp.ui.theme.PortalViewModel
 import java.util.Locale
 
+// Composable responsável por exibir a tela de perfil.
 @Composable
 fun ProfileScreen(
     currentProfile: Profile,
     profilesList: List<Profile>,
     onChangeCurrentProfile: (profile: Profile) -> Unit,
+    portalViewModel: PortalViewModel = viewModel(),
     modifier: Modifier = Modifier
 ) {
-    var switchProfileDialogOpened by remember { mutableStateOf(false) }
+
+    // Coleta o estado atual.
+    val portalUIState by portalViewModel.uiState.collectAsState()
 
     Column(
         modifier = modifier
     ) {
+        // Card de informações de perfil.
         ProfileContent(
-            profileNickname = currentProfile.nickname,
-            profileAvatar = currentProfile.avatar,
-            profileAboutMe = currentProfile.aboutMe,
+            profileNickname = stringResource(currentProfile.nickname),
+            profileAvatar = painterResource(currentProfile.avatar),
+            profileAboutMe = stringResource(currentProfile.aboutMe),
             profilePosts = currentProfile.posts,
             profileFollowers = currentProfile.followers,
-            onClickButtonSwitchProfile = {
-                switchProfileDialogOpened = true
-            }
+            onClickButtonSwitchProfile = { portalViewModel.onClickButtonSwitchProfile() }
         )
     }
-    if (switchProfileDialogOpened) {
+    if (portalUIState.switchProfileDialogOpened) {
+        // Caixa de alteração de perfil.
         SwitchProfileDialog(
+            // Dados para uiState
             currentProfile = currentProfile,
             profilesList = profilesList,
-            onDismissRequest = { switchProfileDialogOpened = false },
+            // Função para viewModel
+            onDismissRequest = { portalViewModel.onDimissRequest() },
             onSwitchProfile = onChangeCurrentProfile
         )
     }
 }
 
+// Composable responsável pelo card de informações de perfil.
 @Composable
 fun ProfileContent(
     profileNickname: String,
@@ -221,6 +226,7 @@ fun ProfileContent(
     }
 }
 
+// Função responsável por formatar a quantidade de seguidores.
 fun toFollowersNotation(followers: Int): String {
     return when {
         followers >= 1000000000 -> String.format(Locale.US, "%.1fb", followers / 1000000000.0).replace(",", ".")

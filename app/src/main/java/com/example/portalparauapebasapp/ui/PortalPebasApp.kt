@@ -1,13 +1,10 @@
 package com.example.portalparauapebasapp.ui
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.portalparauapebasapp.data.NavigationContentList
@@ -16,41 +13,57 @@ import com.example.portalparauapebasapp.model.ScreenType
 import com.example.portalparauapebasapp.ui.components.PortalPebaAppBar
 import com.example.portalparauapebasapp.ui.components.PortalPebaBottomNavigation
 import com.example.portalparauapebasapp.ui.theme.PortalParauapebasAppTheme
+import com.example.portalparauapebasapp.ui.theme.PortalViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 // Função de inicialização do aplicativo que será chamada no MainActivity.
 @Composable
-fun PortalPebaApp() {
-    var currentTab by remember { mutableStateOf(ScreenType.NEWS) }
+fun PortalPebaApp(portalViewModel: PortalViewModel = viewModel()) {
+
+    // Coleta do estado atual.
+    val portalUIState by portalViewModel.uiState.collectAsState()
 
     Scaffold(
         // Define a função da barra superior.
         topBar = { PortalPebaAppBar() },
         bottomBar = {
+            // Função da barra inferior.
             PortalPebaBottomNavigation(
-                currentTab = currentTab,
-                onTabPressed = { pressedTab -> currentTab = pressedTab },
+                currentTab = portalUIState.currentTab,
+                onTabPressed = { portalViewModel.onTabPressed(it) },
                 navigationItemContentList = NavigationContentList.getNavigationContentList()
             )
         }
     ) { paddingValues ->
-        ShowTab(currentTab, Modifier.padding(paddingValues))
+        // Função para exibir a tela respectiva ao botão de navegação pressionado.
+        ShowTab(portalUIState.currentTab, modifier = Modifier.padding(paddingValues))
     }
 }
 
-// função para exibir a tela respectiva ao botão de navegação pressionado
+// Função para exibir a tela respectiva ao botão de navegação pressionado
 @Composable
-fun ShowTab(targetTab: ScreenType, modifier: Modifier = Modifier) {
+fun ShowTab(
+    targetTab: ScreenType,
+    portalViewModel: PortalViewModel = viewModel(),
+    modifier: Modifier = Modifier) {
+
+    // Variável com os dados dos perfis.
     val profilesList = ProfilesList.getProfilesList()
-    var currentProfile by remember { mutableStateOf(profilesList[0]) }
+
+    // Coleta do estado atual.
+    val portalUIState by portalViewModel.uiState.collectAsState()
+
 
     if (targetTab == ScreenType.PROFILE) {
+        // Função da tela de perfil.
         ProfileScreen(
-            currentProfile = currentProfile,
+            currentProfile = portalUIState.currentProfile,
             profilesList = profilesList,
-            onChangeCurrentProfile = { profile -> currentProfile = profile },
+            onChangeCurrentProfile = { portalViewModel.onChangeCurrentProfile(it) },
             modifier = modifier
         )
     } else {
+        // Função da tela de notícias.
         NewsScreen(modifier)
     }
 }
