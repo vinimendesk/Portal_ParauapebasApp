@@ -27,6 +27,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -128,7 +129,7 @@ fun SwitchProfileDialog(
                                         verticalAlignment = Alignment.CenterVertically
                                     ) {
                                         Image(
-                                            painter = profile.avatar,
+                                            painter = painterResource(profile.avatar),
                                             contentDescription = stringResource(R.string.profile_pictureDescription),
                                             contentScale = ContentScale.Crop,
                                             modifier = Modifier
@@ -136,7 +137,7 @@ fun SwitchProfileDialog(
                                                 .clip(CircleShape)
                                         )
                                         Text(
-                                            text = profile.nickname,
+                                            text = stringResource(profile.nickname),
                                             color = if (isCurrentProfile) Color.White else Color.Black,
                                             fontSize = 15.sp,
                                             fontFamily = fontAppBar,

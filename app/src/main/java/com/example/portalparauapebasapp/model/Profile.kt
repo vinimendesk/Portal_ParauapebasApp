@@ -1,11 +1,12 @@
 package com.example.portalparauapebasapp.model
 
-import androidx.compose.ui.graphics.painter.Painter
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 
 data class Profile(
-    val nickname: String,
-    val avatar: Painter,
-    val aboutMe: String,
+    @StringRes val nickname: Int,
+    @DrawableRes val avatar: Int,
+    @StringRes val aboutMe: Int,
     val posts: Int,
     val followers: Int
 )

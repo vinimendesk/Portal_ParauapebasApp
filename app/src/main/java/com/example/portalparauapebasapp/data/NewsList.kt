@@ -7,29 +7,28 @@ import com.example.portalparauapebasapp.model.News
 import com.example.portalparauapebasapp.R
 
 object NewsList {
-    @Composable
     fun getNewsList(): List<News> {
         return listOf(
             News(
-                author = stringResource(R.string.vinicius_mendes_author),
-                authorAvatar = painterResource(R.drawable.viniciusprojeto),
-                title = stringResource(R.string.title_vini_post),
-                description = stringResource(R.string.news_description_vini),
-                postTime = stringResource(R.string.post_time_vini)
+                author = R.string.vinicius_mendes_author,
+                authorAvatar = R.drawable.viniciusprojeto,
+                title = R.string.title_vini_post,
+                description = R.string.news_description_vini,
+                postTime = R.string.post_time_vini
             ),
             News(
-                author = stringResource(R.string.jainer_silva_author),
-                authorAvatar = painterResource(R.drawable.jainerprojeto),
-                title = stringResource(R.string.title_jainer_post),
-                description = stringResource(R.string.news_description_jainer),
-                postTime = stringResource(R.string.post_time_jainer)
+                author = R.string.jainer_silva_author,
+                authorAvatar = R.drawable.jainerprojeto,
+                title = R.string.title_jainer_post,
+                description = R.string.news_description_jainer,
+                postTime = R.string.post_time_jainer
             ),
             News(
-                author = stringResource(R.string.mariana_cardoso_author),
-                authorAvatar = painterResource(R.drawable.marianaprojeto),
-                title = stringResource(R.string.title_mariana_post),
-                description = stringResource(R.string.news_description_mariana),
-                postTime = stringResource(R.string.post_time_mariana)
+                author = R.string.mariana_cardoso_author,
+                authorAvatar = R.drawable.marianaprojeto,
+                title = R.string.title_mariana_post,
+                description = R.string.news_description_mariana,
+                postTime = R.string.post_time_mariana
             )
         )
     }
