@@ -1,0 +1,71 @@
+<resources>
+    <string name="app_name">Portal Parauapebas App</string>
+    <string name="portal_parauapebas_appBarTex">PORTAL PARAUAPEBAS</string>
+    <string name="news_NavigationItem">News</string>
+    <string name="my_profile_NavigationItem">My Profile</string>
+    <string name="show_more_contentButtonNews">Show more content</string>
+    <string name="switch_profile_buttonProfile">Switch profile</string>
+    <string name="close_switch_profile_buttonProfile">Close switch profile dialog</string>
+    <string name="author_pictureDescription">Author Picture</string>
+    <string name="profile_pictureDescription">Profile Picture</string>
+    <string name="profile_postsIndicator">Posts</string>
+    <string name="profile_followersIndicator">Seguidores</string>
+    <string name="switch_profile_dialogTitle">Trocar Perfil</string>
+    <string name="switch_profile_dialogDescription">Selecione um dos perfis abaixo para acessar.</string>
+    <string name="vinicius_mendes_author">Vinicius Mendes</string>
+    <string name="title_vini_post">TUTORIAL DE COMO ROUBAR UMA CIDADE E NÃO SER PRESO</string>
+    <string name="news_description_vini">
+        Tá ligado né, bagulho é e ser ninja, fazer tudo nas sombras, escondidinho, não é segredo.\n
+        Depois é só fazer carreata e prometer butijão de gás para todo mundo. Amanhã eu viajo para \n
+        Paris e o povo ainda me adora.\n
+        O protótipo não deveria conter tantas palavras. My name\'s JOHN CENNA!!!! PANPANRANPAM
+    </string>
+    <string name="jainer_silva_author">Jainer Silva</string>
+    <string name="title_jainer_post">MOTIVOS PARA O LEITE SER O MELHOR ALIMENTO</string>
+    <string name="news_description_jainer">
+        Jainer por ter seu sobrenome Leite, ele é completamente tolerante a substãncia. Ele gosta.\n
+        do leite em todas as suas formas, no queijo, no requeijão, mingual. Um verdadeiro amante. \n
+        Continuo tentando improvisar noticías.\n
+        O protótipo não deveria conter tantas palavras. It\'s been a long time baby.
+    </string>
+    <string name="mariana_cardoso_author">Mariana Cardoso</string>
+    <string name="title_mariana_post">MENSAGEM MOTIVACIONAL</string>
+    <string name="news_description_mariana">
+        Mesmo sem um dor, mesmo sem talento, eu posso ser bom, com muito treinamento.\n
+        Para provar minha teoria, eu vou até o final, porque o trabalho duro vence. \n
+        o dom natural.\n
+        Melhor rap do Tauz, tá maluco.
+    </string>
+    <string name="post_time_vini">Postado há 5 minutos</string>
+    <string name="post_time_jainer">Postado há 36 minutos</string>
+    <string name="post_time_mariana">Postado há 1 hora</string>
+    <string name="vini_aboutme">
+        Ex-hokage de Parauapebas. Mestre em corrupção e carisma.\n
+
+        Compre meu curso no link abaixo:\n
+
+        https://www.privacy/vini_senta_com_carinho
+    </string>
+    <string name="rodolfoblox_nickname">Rodolfo Blox</string>
+    <string name="rodolfoblox_aboutme">
+        Eu amo jogar Roblox, eu respiro Roblox, dedico todo meu tempo no Roblox.
+
+        Estourei o limite do meu cartão, da minha mãe, do meu pai e do meu irmão só com Robux.
+        Quando mais Robux, mais cosméticos, mais ostentação, mais amigos babões.\n\n
+
+        Se você tirar o Roblox de mim, eu tiro tudo que você tem.\n
+        Me segue pra mais Roblox. Você tem Robux? Me dê papai.
+    </string>
+    <string name="donabenta_nickname">Dona Benta</string>
+    <string name="donabenta_aboutme">
+        Hey there, I am using Whatsapp!
+    </string>
+    <string name="mariana_cardoso_aboutme">
+        Eu finjo que não percebo. Mas tudo está sendo observado.
+    </string>
+    <string name="jainer_silva_aboutme">
+        Jovem foragido após causar estresse pós-traumático em uma casa no interior
+        de Xique-Xique Bahia por conta de sua enorme feiura.\n\n
+        Eu sou meu único seguidor.
+    </string>
+</resources>
