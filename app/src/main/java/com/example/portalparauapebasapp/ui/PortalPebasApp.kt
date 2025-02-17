@@ -64,7 +64,7 @@ fun ShowTab(
         )
     } else {
         // Função da tela de notícias.
-        NewsScreen(modifier)
+        NewsScreen(modifier = modifier)
     }
 }
 

@@ -35,4 +35,12 @@ class PortalViewModel : ViewModel() {
         _uiState.value = _uiState.value.copy(switchProfileDialogOpened = false)
     }
 
+    // Função NewsScreen botão show more information.
+    fun onClickButtonShowMore(moreInformation: Map<Int, Boolean>, index: Int) {
+        _uiState.value = _uiState.value.copy(moreInformartion = moreInformation.toMutableMap().apply {
+            this[index] = !(this[index] ?: false)
+        }
+        )
+    }
+
 }

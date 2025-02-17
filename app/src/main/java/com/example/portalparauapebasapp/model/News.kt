@@ -1,11 +1,12 @@
 package com.example.portalparauapebasapp.model
 
-import androidx.compose.ui.graphics.painter.Painter
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 
 data class News(
-    val author: String,
-    val authorAvatar: Painter,
-    val title: String,
-    val description: String,
-    val postTime: String
+    @StringRes val author: Int,
+    @DrawableRes val authorAvatar: Int,
+    @StringRes val title: Int,
+    @StringRes val description: Int,
+    @StringRes val postTime: Int
 )
